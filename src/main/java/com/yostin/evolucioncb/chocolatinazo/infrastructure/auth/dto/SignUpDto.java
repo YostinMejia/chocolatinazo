@@ -1,4 +1,4 @@
-package com.yostin.evolucioncb.chocolatinazo.dto;
+package com.yostin.evolucioncb.chocolatinazo.infrastructure.auth.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

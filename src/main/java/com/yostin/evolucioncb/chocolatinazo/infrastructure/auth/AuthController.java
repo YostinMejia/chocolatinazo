@@ -1,7 +1,9 @@
 package com.yostin.evolucioncb.chocolatinazo.infrastructure.auth;
 
 import com.yostin.evolucioncb.chocolatinazo.application.service.AuthService;
-import com.yostin.evolucioncb.chocolatinazo.dto.SignUpDto;
+import com.yostin.evolucioncb.chocolatinazo.domain.dto.AuthResult;
+import com.yostin.evolucioncb.chocolatinazo.infrastructure.auth.dto.LoginDto;
+import com.yostin.evolucioncb.chocolatinazo.infrastructure.auth.dto.SignUpDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,5 +23,10 @@ public class AuthController {
     public ResponseEntity<String> signUp(@Valid @RequestBody SignUpDto signUpDto) {
         authService.signUp(signUpDto);
         return ResponseEntity.status(HttpStatus.CREATED).body("User registered. Please verify your email.");
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<AuthResult> login(@Valid @RequestBody LoginDto loginDto){
+         return ResponseEntity.ok().body(authService.login(loginDto));
     }
 }

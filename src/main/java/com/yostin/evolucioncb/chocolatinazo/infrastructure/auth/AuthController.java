@@ -2,6 +2,7 @@ package com.yostin.evolucioncb.chocolatinazo.infrastructure.auth;
 
 import com.yostin.evolucioncb.chocolatinazo.application.service.AuthService;
 import com.yostin.evolucioncb.chocolatinazo.domain.dto.AuthResult;
+import com.yostin.evolucioncb.chocolatinazo.infrastructure.auth.dto.ConfirmEmailDto;
 import com.yostin.evolucioncb.chocolatinazo.infrastructure.auth.dto.LoginDto;
 import com.yostin.evolucioncb.chocolatinazo.infrastructure.auth.dto.SignUpDto;
 import jakarta.validation.Valid;
@@ -26,7 +27,13 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResult> login(@Valid @RequestBody LoginDto loginDto){
-         return ResponseEntity.ok().body(authService.login(loginDto));
+    public ResponseEntity<AuthResult> login(@Valid @RequestBody LoginDto loginDto) {
+        return ResponseEntity.ok().body(authService.login(loginDto));
+    }
+
+    @PostMapping("/confirm-email")
+    public ResponseEntity<String> confirmEmail(@Valid @RequestBody ConfirmEmailDto confirmEmailDto) {
+        authService.confirmSignup(confirmEmailDto);
+        return ResponseEntity.ok("Account confirmed successfully. You can now log in.");
     }
 }

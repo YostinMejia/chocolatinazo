@@ -43,7 +43,9 @@ public class AuthAdapter implements AuthRepository {
                     .password(password)
                     .userAttributes(
                             AttributeType.builder().name("email").value(email).build(),
-                            AttributeType.builder().name("preferred_username").value(username).build()
+                            AttributeType.builder().name("preferred_username").value(username).build(),
+                            AttributeType.builder().name("custom:role").value("PLAYER").build()
+
                     )
                     .build());
         } catch (CognitoIdentityProviderException e) {
@@ -94,6 +96,30 @@ public class AuthAdapter implements AuthRepository {
             throw new AuthException("Authentication failed: " + e.awsErrorDetails().errorMessage(), e);
         } catch (Exception e) {
             throw new AuthException("Unexpected error during login", e);
+        }
+    }
+
+    @Override
+    public void confirmSignUp(String email, String confirmationCode) {
+        try {
+            cognitoClient.confirmSignUp(
+                    ConfirmSignUpRequest.builder()
+                            .clientId(clientId)
+                            .secretHash(calculateSecretHash(email))
+                            .username(email)
+                            .confirmationCode(confirmationCode)
+                            .build()
+            );
+        } catch (CodeMismatchException e) {
+            throw new AuthException("Invalid confirmation code", e);
+        } catch (ExpiredCodeException e) {
+            throw new AuthException("Confirmation code has expired", e);
+        } catch (UserNotFoundException e) {
+            throw new AuthException("User not found", e);
+        } catch (CognitoIdentityProviderException e) {
+            throw new AuthException("Confirmation failed: " + e.awsErrorDetails().errorMessage(), e);
+        } catch (Exception e) {
+            throw new AuthException("Unexpected error during confirmation", e);
         }
     }
 

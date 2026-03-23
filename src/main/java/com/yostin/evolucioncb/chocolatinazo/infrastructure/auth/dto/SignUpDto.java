@@ -16,5 +16,8 @@ public record SignUpDto (
         String password,
         @NotNull
         @NotBlank
-        String username){
+        String username,
+        @Pattern(regexp = "PLAYER|AUDITOR|ADMIN")
+        @NotNull()
+        String role){
 }

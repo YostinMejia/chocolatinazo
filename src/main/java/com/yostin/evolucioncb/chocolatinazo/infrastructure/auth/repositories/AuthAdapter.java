@@ -34,7 +34,7 @@ public class AuthAdapter implements AuthRepository {
     }
 
     @Override
-    public void signUp(String email, String password, String username) {
+    public void signUp(String email, String password, String username, String role) {
         try {
             cognitoClient.signUp(SignUpRequest.builder()
                     .clientId(clientId)
@@ -44,7 +44,7 @@ public class AuthAdapter implements AuthRepository {
                     .userAttributes(
                             AttributeType.builder().name("email").value(email).build(),
                             AttributeType.builder().name("preferred_username").value(username).build(),
-                            AttributeType.builder().name("custom:role").value("PLAYER").build()
+                            AttributeType.builder().name("custom:role").value(role).build()
 
                     )
                     .build());

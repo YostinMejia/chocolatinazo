@@ -4,45 +4,52 @@ import com.yostin.evolucioncb.chocolatinazo.domain.exceptions.GameException;
 import com.yostin.evolucioncb.chocolatinazo.domain.models.ChocolatinaUser;
 import com.yostin.evolucioncb.chocolatinazo.domain.repositories.ChocolatinaUserRepository;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
 public class ChocolatinaUserService {
     private final ChocolatinaUserRepository chocolatinaUserRepository;
 
-    public ChocolatinaUser save(String gameCode, String email) {
-        if (hasUserJoined(gameCode, email)){
+    public ChocolatinaUser save(String email) {
+        if (hasUserJoined(email)) {
             throw new GameException("User has already joined this game");
         }
 
         ChocolatinaUser chocolatinaUser = ChocolatinaUser.builder()
-                .stickerNumber(generateUniqueStickerNumber(gameCode))
+                .stickerNumber(generateUniqueStickerNumber())
                 .userEmail(email)
-                .gameCode(gameCode)
                 .createdAt(LocalDateTime.now())
                 .build();
         return chocolatinaUserRepository.save(chocolatinaUser);
     }
 
-    private boolean hasUserJoined(String gameCode, String email){
-        return chocolatinaUserRepository.existsByGameCodeAndUserEmail(gameCode, email);
+    private boolean hasUserJoined(String email) {
+        return chocolatinaUserRepository.existsByUserEmail(email);
     }
 
-    private int generateUniqueStickerNumber(String gameCode) {
-        int stickerNumber;
-        do {
-            stickerNumber = getRandomNumber();
-        } while (chocolatinaUserRepository.existsByStickerNumberAndGameCode(stickerNumber, gameCode));
+    private int generateUniqueStickerNumber() {
+        List<Integer> takenNumbers = chocolatinaUserRepository.findAllStickerNumbers();
 
-        return stickerNumber;
-    }
+        List<Integer> allPossibleNumbers = IntStream.rangeClosed(1, 320)
+                .boxed()
+                .collect(Collectors.toList());
 
-    private static int getRandomNumber() {
-        int min = 1;
-        int max = 320;
-        return min + (int) (Math.random() * ((max - min) + 1));
+        allPossibleNumbers.removeAll(takenNumbers);
+
+        if (allPossibleNumbers.isEmpty()) {
+            throw new RuntimeException("No more chocolatinas available!");
+        }
+
+        Collections.shuffle(allPossibleNumbers);
+        return allPossibleNumbers.getFirst();
     }
+    
 }

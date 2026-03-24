@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthService {
     private final AuthRepository authRepository;
+    private final GameService gameService;
     public void signUp(SignUpDto signUpDto){
         authRepository.signUp(signUpDto.email(),signUpDto.password(), signUpDto.username(), signUpDto.role());
     }

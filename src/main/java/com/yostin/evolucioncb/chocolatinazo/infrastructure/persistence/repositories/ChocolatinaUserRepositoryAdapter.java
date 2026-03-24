@@ -3,11 +3,13 @@ package com.yostin.evolucioncb.chocolatinazo.infrastructure.persistence.reposito
 import com.yostin.evolucioncb.chocolatinazo.domain.models.ChocolatinaUser;
 import com.yostin.evolucioncb.chocolatinazo.domain.repositories.ChocolatinaUserRepository;
 import com.yostin.evolucioncb.chocolatinazo.infrastructure.mappers.ChocolatinaUserMapper;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ChocolatinaUserRepositoryAdapter implements ChocolatinaUserRepository {
     private final JpaChocolatinaUserRepository chocolatinaUserRepository;
     private final ChocolatinaUserMapper chocolatinaUserMapper;
@@ -20,12 +22,12 @@ public class ChocolatinaUserRepositoryAdapter implements ChocolatinaUserReposito
     }
 
     @Override
-    public boolean existsByStickerNumberAndGameCode(int stickerNumber, String gameCode) {
-        return chocolatinaUserRepository.existsByStickerNumberAndGameCode(stickerNumber, gameCode);
+    public boolean existsByUserEmail(String email) {
+        return chocolatinaUserRepository.existsByUserEmail(email);
     }
 
     @Override
-    public boolean existsByGameCodeAndUserEmail(String gameCode, String userEmail) {
-        return chocolatinaUserRepository.existsByGameCodeAndUserEmail(gameCode,userEmail);
+    public List<Integer> findAllStickerNumbers() {
+        return chocolatinaUserRepository.findAllStickerNumbers();
     }
 }

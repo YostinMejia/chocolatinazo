@@ -20,8 +20,8 @@ public class ChocolatinaUserEntity {
     @Column(nullable = false)
     private int stickerNumber;
 
-    @Column(nullable = false)
-    private String gameCode;
+//    @Column(nullable = false)
+//    private String gameCode;
 
     @Column(nullable = false)
     private LocalDateTime createdAt;

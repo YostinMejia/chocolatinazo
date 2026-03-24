@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class AuthService {
     private final AuthRepository authRepository;
     public void signUp(SignUpDto signUpDto){
-        authRepository.signUp(signUpDto.email(),signUpDto.password(), signUpDto.username());
+        authRepository.signUp(signUpDto.email(),signUpDto.password(), signUpDto.username(), signUpDto.role());
     }
 
     public AuthResult login(LoginDto loginDto){

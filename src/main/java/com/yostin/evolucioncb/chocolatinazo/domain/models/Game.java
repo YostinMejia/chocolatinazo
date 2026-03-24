@@ -19,11 +19,20 @@ public class Game {
     public enum Status{
         WAITING,
         FINISHED,
-        PLAYING
+        PLAYING;
+
+        public String getValue(){
+            return this.name();
+        }
     }
 
     public enum Rule{
         HIGHEST,
-        LOWEST
+        LOWEST;
+
+        public String getValue(){
+            return this.name();
+        }
     }
+
 }

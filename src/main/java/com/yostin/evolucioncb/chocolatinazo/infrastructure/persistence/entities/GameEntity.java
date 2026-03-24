@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class GameEntity {
 
     @Id
-    @Column(nullable = false, updatable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
 
     @Column(nullable = false)

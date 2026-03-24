@@ -2,6 +2,7 @@ package com.yostin.evolucioncb.chocolatinazo.infrastructure.auth.repositories;
 
 import com.yostin.evolucioncb.chocolatinazo.domain.dto.AuthResult;
 import com.yostin.evolucioncb.chocolatinazo.domain.exceptions.AuthException;
+import com.yostin.evolucioncb.chocolatinazo.domain.models.Roles;
 import com.yostin.evolucioncb.chocolatinazo.domain.repositories.AuthRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,7 +35,7 @@ public class AuthAdapter implements AuthRepository {
     }
 
     @Override
-    public void signUp(String email, String password, String username, String role) {
+    public void signUp(String email, String password, String username, Roles role) {
         try {
             cognitoClient.signUp(SignUpRequest.builder()
                     .clientId(clientId)
@@ -44,7 +45,7 @@ public class AuthAdapter implements AuthRepository {
                     .userAttributes(
                             AttributeType.builder().name("email").value(email).build(),
                             AttributeType.builder().name("preferred_username").value(username).build(),
-                            AttributeType.builder().name("custom:role").value(role).build()
+                            AttributeType.builder().name("custom:role").value(role.getValue()).build()
 
                     )
                     .build());

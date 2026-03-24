@@ -1,5 +1,6 @@
 package com.yostin.evolucioncb.chocolatinazo.infrastructure.auth.dto;
 
+import com.yostin.evolucioncb.chocolatinazo.domain.models.Roles;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -17,7 +18,6 @@ public record SignUpDto (
         @NotNull
         @NotBlank
         String username,
-        @Pattern(regexp = "PLAYER|AUDITOR|ADMIN")
-        @NotNull()
-        String role){
+        @NotNull(message = "Role must be PLAYER, AUDITOR or ADMIN")
+        Roles role){
 }

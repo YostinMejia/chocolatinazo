@@ -21,7 +21,7 @@ public class GameController {
     private final GameService gameService;
     private final GameMapper gameMapper;
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<GameResponseDto> createGame(@Valid @RequestBody CreateGameDto createGameDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 gameMapper.toResponseFromGame(

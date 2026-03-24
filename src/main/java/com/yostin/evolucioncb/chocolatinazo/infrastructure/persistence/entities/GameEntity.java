@@ -31,9 +31,9 @@ public class GameEntity {
     @Column(nullable = false)
     private Game.Status status;
 
-    @Column(nullable = false, unique = true)
-    private String adminPassword;
+//    @Column(nullable = false, unique = true)
+//    private String adminPassword;
 
-    @Column(nullable = false, unique = true)
-    private String gameCode;
+//    @Column(nullable = false, unique = true)
+//    private String gameCode;
 }

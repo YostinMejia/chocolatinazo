@@ -19,5 +19,8 @@ public record SignUpDto (
         @NotBlank
         String username,
         @NotNull(message = "Role must be PLAYER, AUDITOR or ADMIN")
-        Roles role){
+        Roles role
+//        @NotBlank
+//        String adminPassword
+){
 }

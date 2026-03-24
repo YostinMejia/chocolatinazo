@@ -5,40 +5,40 @@ import com.yostin.evolucioncb.chocolatinazo.domain.models.ChocolatinaUser;
 import com.yostin.evolucioncb.chocolatinazo.domain.models.Game;
 import com.yostin.evolucioncb.chocolatinazo.domain.repositories.GameRepository;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Random;
-import java.util.UUID;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class GameService {
     private final GameRepository gameRepository;
     private final ChocolatinaUserService chocolatinaUserService;
 
-    public Game save(BigDecimal chocolatinaPrice, Game.Rule rule, String adminPassword) {
-        Game game = generateGame(chocolatinaPrice, rule, adminPassword);
+    public Game save(BigDecimal chocolatinaPrice, Game.Rule rule) {
+        Game game = generateGame(chocolatinaPrice, rule);
         return this.gameRepository.save(game);
     }
 
-    public ChocolatinaUser join(String gameCode, String email) {
-        if (!gameRepository.existsByGameCode(gameCode)){
-            throw new GameException("Invalid Game Code");
-        }
-        return this.chocolatinaUserService.save(gameCode, email);
+    public ChocolatinaUser join(String email) {
+//        if (!chocolatinaUserService.(gameCode)){
+//            throw new GameException("Invalid Game Code");
+//        }
+        return this.chocolatinaUserService.save(email);
     }
 
+//    public boolean isValidAdminPassword(Game game, String passwordGiven) {
+//        return game.getAdminPassword().equals(passwordGiven);
+//  }
 
-    private Game generateGame(BigDecimal chocolatinaPrice, Game.Rule rule, String adminPassword) {
+    private Game generateGame(BigDecimal chocolatinaPrice, Game.Rule rule) {
         return Game.builder()
-                .gameCode(UUID.randomUUID().toString())
                 .createdAt(LocalDateTime.now())
                 .status(Game.Status.WAITING)
                 .rule(rule)
                 .chocolatinaPrice(chocolatinaPrice)
-                .adminPassword(adminPassword)
                 .build();
     }
 }

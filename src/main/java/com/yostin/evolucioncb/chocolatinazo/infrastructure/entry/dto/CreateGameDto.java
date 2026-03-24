@@ -11,9 +11,9 @@ public record CreateGameDto(
         @DecimalMin(value = "0.0", message = "Price must be greater than 0")
         BigDecimal unitPrice,
         @NotNull(message = "Rule must be either HIGHEST or LOWEST")
-        Game.Rule rule,
-        @NotNull
-        @NotBlank
-        String adminPassword
+        Game.Rule rule
+//        @NotNull
+//        @NotBlank
+//        String adminPassword
 ) {
 }

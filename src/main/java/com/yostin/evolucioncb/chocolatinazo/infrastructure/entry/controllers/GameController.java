@@ -4,7 +4,6 @@ import com.yostin.evolucioncb.chocolatinazo.application.service.GameService;
 import com.yostin.evolucioncb.chocolatinazo.domain.models.ChocolatinaUser;
 import com.yostin.evolucioncb.chocolatinazo.infrastructure.entry.dto.CreateGameDto;
 import com.yostin.evolucioncb.chocolatinazo.infrastructure.entry.dto.GameResponseDto;
-import com.yostin.evolucioncb.chocolatinazo.infrastructure.entry.dto.JoinGameDto;
 import com.yostin.evolucioncb.chocolatinazo.infrastructure.mappers.GameMapper;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -29,18 +28,19 @@ public class GameController {
     public ResponseEntity<GameResponseDto> create(@Valid @RequestBody CreateGameDto createGameDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 gameMapper.toResponseFromGame(
-                        gameService.save(createGameDto.unitPrice(), createGameDto.rule(), createGameDto.adminPassword())
+                        gameService.save(createGameDto.unitPrice(), createGameDto.rule())
                 )
         );
     }
 
     @PostMapping("/join")
-    public ResponseEntity<String> join(@Valid @RequestBody JoinGameDto joinGameDto, @AuthenticationPrincipal Jwt jwt) {
+    public ResponseEntity<String> join( @AuthenticationPrincipal Jwt jwt) {
         String email = jwt.getClaim("email");
         if (email == null) {
             return ResponseEntity.badRequest().body("Email claim not found in token");
         }
-        ChocolatinaUser chocolatinaUser = gameService.join(joinGameDto.gameCode(), email);
-        return ResponseEntity.ok().body(email + " Joined successfully to the " + joinGameDto.gameCode() + " and the sticker is " + chocolatinaUser.getStickerNumber());
+
+        ChocolatinaUser chocolatinaUser = gameService.join(email);
+        return ResponseEntity.ok().body(email + " Joined successfully to the Game" + " and the sticker is " + chocolatinaUser.getStickerNumber());
     }
 }

@@ -15,8 +15,8 @@ public class Game {
     private BigDecimal chocolatinaPrice;
     private Rule rule;
     private Status status;
-    private String adminPassword;
-    private String gameCode;
+//    private String adminPassword;
+//    private String gameCode;
 
     public enum Status{
         WAITING,

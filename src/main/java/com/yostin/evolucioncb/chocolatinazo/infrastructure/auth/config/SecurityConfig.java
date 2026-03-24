@@ -24,6 +24,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(apiVersion + "/auth/**").permitAll()
                         .requestMatchers(apiVersion + "/game/create").hasAnyRole(Roles.ADMIN.getValue(), Roles.AUDITOR.getValue())
+                        .requestMatchers(apiVersion + "/game/join").hasAnyRole(Roles.ADMIN.getValue(), Roles.AUDITOR.getValue(), Roles.PLAYER.getValue())
                         .requestMatchers(apiVersion + "/game/admin/**").hasRole(Roles.ADMIN.getValue())
                         .requestMatchers(apiVersion + "/game/audit/**").hasRole(Roles.AUDITOR.getValue())
                         .anyRequest().authenticated()

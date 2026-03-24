@@ -17,4 +17,9 @@ public class GameRepositoryAdapter implements GameRepository {
     public Game save(Game game) {
         return gameMapper.toGameFromEntity(gameRepository.save(gameMapper.toGameEntity(game)));
     }
+
+    @Override
+    public boolean existsByGameCode(String gameCode) {
+        return gameRepository.existsByGameCode(gameCode);
+    }
 }

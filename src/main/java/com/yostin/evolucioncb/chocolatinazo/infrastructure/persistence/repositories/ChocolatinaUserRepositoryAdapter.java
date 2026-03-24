@@ -30,4 +30,9 @@ public class ChocolatinaUserRepositoryAdapter implements ChocolatinaUserReposito
     public List<Integer> findAllStickerNumbers() {
         return chocolatinaUserRepository.findAllStickerNumbers();
     }
+
+    @Override
+    public List<ChocolatinaUser> findAll() {
+        return chocolatinaUserRepository.findAll().stream().map(chocolatinaUserMapper::toModelFromEntity).toList();
+    }
 }

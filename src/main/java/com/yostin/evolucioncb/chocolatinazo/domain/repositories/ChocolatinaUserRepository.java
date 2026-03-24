@@ -9,5 +9,6 @@ public interface ChocolatinaUserRepository {
     ChocolatinaUser save(ChocolatinaUser chocolatinaUser);
     boolean existsByUserEmail( String email);
     List<Integer> findAllStickerNumbers();
+    List<ChocolatinaUser> findAll();
 
 }

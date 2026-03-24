@@ -15,7 +15,5 @@ public class ChocolatinaUser {
     private String id;
     private String userEmail;
     private int stickerNumber;
-    private String gameCode;
     private LocalDateTime createdAt;
-
 }

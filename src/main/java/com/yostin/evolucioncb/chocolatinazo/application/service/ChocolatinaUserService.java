@@ -3,7 +3,6 @@ package com.yostin.evolucioncb.chocolatinazo.application.service;
 import com.yostin.evolucioncb.chocolatinazo.domain.exceptions.GameException;
 import com.yostin.evolucioncb.chocolatinazo.domain.models.ChocolatinaUser;
 import com.yostin.evolucioncb.chocolatinazo.domain.repositories.ChocolatinaUserRepository;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -50,6 +49,10 @@ public class ChocolatinaUserService {
 
         Collections.shuffle(allPossibleNumbers);
         return allPossibleNumbers.getFirst();
+    }
+
+    public List<ChocolatinaUser> findAll(){
+        return chocolatinaUserRepository.findAll();
     }
     
 }

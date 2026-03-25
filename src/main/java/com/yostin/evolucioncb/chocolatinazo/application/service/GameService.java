@@ -46,4 +46,19 @@ public class GameService {
     public List<ChocolatinaUser> findAll(){
         return chocolatinaUserService.findAll();
     }
+
+    public Game updateChocolatinaPrice(String gameId, BigDecimal newPrice) {
+        Game game = gameRepository.findById(gameId)
+                .orElseThrow(() -> new GameException("Game not found with id: " + gameId));
+
+        Game updatedGame = Game.builder()
+                .id(game.getId())
+                .createdAt(game.getCreatedAt())
+                .chocolatinaPrice(newPrice)
+                .rule(game.getRule())
+                .status(game.getStatus())
+                .build();
+
+        return gameRepository.update(updatedGame);
+    }
 }

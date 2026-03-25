@@ -23,10 +23,10 @@ public class SecurityConfig {
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(apiVersion + "/auth/**").permitAll()
-                        .requestMatchers(apiVersion + "/game/create").hasAnyRole(Roles.ADMIN.getValue(), Roles.AUDITOR.getValue())
-                        .requestMatchers(apiVersion + "/game/join").hasAnyRole(Roles.ADMIN.getValue(), Roles.AUDITOR.getValue(), Roles.PLAYER.getValue())
                         .requestMatchers(apiVersion + "/game/admin/**").hasRole(Roles.ADMIN.getValue())
                         .requestMatchers(apiVersion + "/game/audit/**").hasRole(Roles.AUDITOR.getValue())
+                        .requestMatchers(apiVersion + "/game/create").hasAnyRole(Roles.ADMIN.getValue(), Roles.AUDITOR.getValue())
+                        .requestMatchers(apiVersion + "/game/join").hasAnyRole(Roles.ADMIN.getValue(), Roles.AUDITOR.getValue(), Roles.PLAYER.getValue())
                         .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2

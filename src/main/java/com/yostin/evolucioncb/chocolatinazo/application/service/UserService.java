@@ -1,7 +1,7 @@
 package com.yostin.evolucioncb.chocolatinazo.application.service;
 
-import com.yostin.evolucioncb.chocolatinazo.domain.models.User;
-import com.yostin.evolucioncb.chocolatinazo.domain.repositories.UserRepository;
+import com.yostin.evolucioncb.chocolatinazo.domain.user.models.User;
+import com.yostin.evolucioncb.chocolatinazo.domain.user.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 @Service

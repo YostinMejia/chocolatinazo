@@ -1,8 +1,8 @@
 package com.yostin.evolucioncb.chocolatinazo.application.service;
 
-import com.yostin.evolucioncb.chocolatinazo.domain.exceptions.GameException;
-import com.yostin.evolucioncb.chocolatinazo.domain.models.ChocolatinaUser;
-import com.yostin.evolucioncb.chocolatinazo.domain.repositories.ChocolatinaUserRepository;
+import com.yostin.evolucioncb.chocolatinazo.domain.game.exceptions.GameException;
+import com.yostin.evolucioncb.chocolatinazo.domain.chocolatinauser.models.ChocolatinaUser;
+import com.yostin.evolucioncb.chocolatinazo.domain.chocolatinauser.repositories.ChocolatinaUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -53,6 +53,10 @@ public class ChocolatinaUserService {
 
     public List<ChocolatinaUser> findAll(){
         return chocolatinaUserRepository.findAll();
+    }
+
+    public void deleteAll(){
+        chocolatinaUserRepository.deleteAll();
     }
     
 }

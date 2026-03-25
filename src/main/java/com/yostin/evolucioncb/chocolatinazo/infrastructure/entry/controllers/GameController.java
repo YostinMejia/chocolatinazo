@@ -1,10 +1,10 @@
 package com.yostin.evolucioncb.chocolatinazo.infrastructure.entry.controllers;
 
 import com.yostin.evolucioncb.chocolatinazo.application.service.GameService;
-import com.yostin.evolucioncb.chocolatinazo.domain.models.ChocolatinaUser;
-import com.yostin.evolucioncb.chocolatinazo.domain.models.Game;
+import com.yostin.evolucioncb.chocolatinazo.domain.chocolatinauser.models.ChocolatinaUser;
+import com.yostin.evolucioncb.chocolatinazo.domain.finishedgame.models.FinishedGame;
+import com.yostin.evolucioncb.chocolatinazo.domain.game.models.Game;
 import com.yostin.evolucioncb.chocolatinazo.infrastructure.entry.dto.CreateGameDto;
-import com.yostin.evolucioncb.chocolatinazo.infrastructure.entry.dto.GameResponseDto;
 import com.yostin.evolucioncb.chocolatinazo.infrastructure.entry.dto.UpdateChocolatinaPriceDto;
 import com.yostin.evolucioncb.chocolatinazo.infrastructure.mappers.GameMapper;
 import jakarta.validation.Valid;
@@ -26,11 +26,10 @@ public class GameController {
     private final GameMapper gameMapper;
 
     @PostMapping("/create")
-    public ResponseEntity<GameResponseDto> create(@Valid @RequestBody CreateGameDto createGameDto) {
+    public ResponseEntity<Game> create(@Valid @RequestBody CreateGameDto createGameDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(
-                gameMapper.toResponseFromGame(
                         gameService.save(createGameDto.unitPrice(), createGameDto.rule())
-                )
+
         );
     }
 
@@ -58,5 +57,12 @@ public class GameController {
                 gameId,
                 request.chocolatinaPrice()
         ));
+    }
+
+    @PostMapping("/admin/calculate-loser")
+    public ResponseEntity<FinishedGame> calculateLoser() {
+        return ResponseEntity.ok(
+                gameService.calculateLoser()
+        );
     }
 }

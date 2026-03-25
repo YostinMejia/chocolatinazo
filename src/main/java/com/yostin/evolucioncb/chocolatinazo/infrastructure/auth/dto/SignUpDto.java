@@ -1,6 +1,6 @@
 package com.yostin.evolucioncb.chocolatinazo.infrastructure.auth.dto;
 
-import com.yostin.evolucioncb.chocolatinazo.domain.models.Roles;
+import com.yostin.evolucioncb.chocolatinazo.domain.auth.models.Roles;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

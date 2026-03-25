@@ -1,9 +1,9 @@
 package com.yostin.evolucioncb.chocolatinazo.infrastructure.auth.repositories;
 
-import com.yostin.evolucioncb.chocolatinazo.domain.dto.AuthResult;
-import com.yostin.evolucioncb.chocolatinazo.domain.exceptions.AuthException;
-import com.yostin.evolucioncb.chocolatinazo.domain.models.Roles;
-import com.yostin.evolucioncb.chocolatinazo.domain.repositories.AuthRepository;
+import com.yostin.evolucioncb.chocolatinazo.domain.auth.dto.AuthResult;
+import com.yostin.evolucioncb.chocolatinazo.domain.auth.exceptions.AuthException;
+import com.yostin.evolucioncb.chocolatinazo.domain.auth.models.Roles;
+import com.yostin.evolucioncb.chocolatinazo.domain.auth.repositories.AuthRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;

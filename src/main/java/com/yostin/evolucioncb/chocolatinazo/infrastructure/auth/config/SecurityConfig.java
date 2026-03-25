@@ -1,12 +1,9 @@
 package com.yostin.evolucioncb.chocolatinazo.infrastructure.auth.config;
 
-import com.yostin.evolucioncb.chocolatinazo.domain.models.Roles;
-import lombok.AllArgsConstructor;
+import com.yostin.evolucioncb.chocolatinazo.domain.auth.models.Roles;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;

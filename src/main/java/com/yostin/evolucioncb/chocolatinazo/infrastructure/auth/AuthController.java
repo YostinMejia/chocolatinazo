@@ -1,7 +1,7 @@
 package com.yostin.evolucioncb.chocolatinazo.infrastructure.auth;
 
 import com.yostin.evolucioncb.chocolatinazo.application.service.AuthService;
-import com.yostin.evolucioncb.chocolatinazo.domain.dto.AuthResult;
+import com.yostin.evolucioncb.chocolatinazo.domain.auth.dto.AuthResult;
 import com.yostin.evolucioncb.chocolatinazo.infrastructure.auth.dto.ConfirmEmailDto;
 import com.yostin.evolucioncb.chocolatinazo.infrastructure.auth.dto.LoginDto;
 import com.yostin.evolucioncb.chocolatinazo.infrastructure.auth.dto.SignUpDto;

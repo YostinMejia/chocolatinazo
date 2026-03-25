@@ -1,7 +1,7 @@
 package com.yostin.evolucioncb.chocolatinazo.infrastructure.entry.dto;
 
 
-import com.yostin.evolucioncb.chocolatinazo.domain.models.Game;
+import com.yostin.evolucioncb.chocolatinazo.domain.game.models.Game;
 import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;

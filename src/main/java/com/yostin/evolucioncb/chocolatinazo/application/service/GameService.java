@@ -109,4 +109,7 @@ public class GameService {
         };
     }
 
+    public List<FinishedGame> findAllFinishedGames(){
+        return  finishedGameRepository.findAll();
+    }
 }

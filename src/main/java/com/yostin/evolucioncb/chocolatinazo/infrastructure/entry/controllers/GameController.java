@@ -65,4 +65,11 @@ public class GameController {
                 gameService.calculateLoser()
         );
     }
+
+    @GetMapping("/audit/finished-games")
+    public ResponseEntity<List<FinishedGame>> findAllFinishedGames() {
+        return ResponseEntity.ok(
+                gameService.findAllFinishedGames()
+        );
+    }
 }

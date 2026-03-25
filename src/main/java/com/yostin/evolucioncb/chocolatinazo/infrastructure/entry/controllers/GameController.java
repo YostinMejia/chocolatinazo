@@ -2,8 +2,10 @@ package com.yostin.evolucioncb.chocolatinazo.infrastructure.entry.controllers;
 
 import com.yostin.evolucioncb.chocolatinazo.application.service.GameService;
 import com.yostin.evolucioncb.chocolatinazo.domain.models.ChocolatinaUser;
+import com.yostin.evolucioncb.chocolatinazo.domain.models.Game;
 import com.yostin.evolucioncb.chocolatinazo.infrastructure.entry.dto.CreateGameDto;
 import com.yostin.evolucioncb.chocolatinazo.infrastructure.entry.dto.GameResponseDto;
+import com.yostin.evolucioncb.chocolatinazo.infrastructure.entry.dto.UpdateChocolatinaPriceDto;
 import com.yostin.evolucioncb.chocolatinazo.infrastructure.mappers.GameMapper;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -33,7 +35,7 @@ public class GameController {
     }
 
     @PostMapping("/join")
-    public ResponseEntity<String> join( @AuthenticationPrincipal Jwt jwt) {
+    public ResponseEntity<String> join(@AuthenticationPrincipal Jwt jwt) {
         String email = jwt.getClaim("email");
         if (email == null) {
             return ResponseEntity.badRequest().body("Email claim not found in token");
@@ -46,5 +48,15 @@ public class GameController {
     @GetMapping("/audit")
     public ResponseEntity<List<ChocolatinaUser>> findAll() {
         return ResponseEntity.ok().body(gameService.findAll());
+    }
+
+    @PatchMapping("/admin/update-price/{gameId}")
+    public ResponseEntity<Game> updateChocolatinaPrice(
+            @PathVariable String gameId, @Valid @RequestBody UpdateChocolatinaPriceDto request) {
+
+        return ResponseEntity.ok().body(gameService.updateChocolatinaPrice(
+                gameId,
+                request.chocolatinaPrice()
+        ));
     }
 }

@@ -23,6 +23,9 @@ public class GameService {
     private final FinishedGameRepository finishedGameRepository;
 
     public Game save(BigDecimal chocolatinaPrice, Game.Rule rule) {
+        if (gameRepository.findCurrentGame().isPresent()) {
+            throw new GameException("Can't create two games");
+        }
         Game game = generateGame(chocolatinaPrice, rule);
         return this.gameRepository.save(game);
     }
